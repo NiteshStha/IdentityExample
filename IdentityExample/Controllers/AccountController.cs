@@ -37,7 +37,13 @@ namespace IdentityExample.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp(SignUpViewModel model)
         {
-            if (ModelState.IsValid)
+            var checkEmployee = await _context.Users.SingleOrDefaultAsync(x => x.EmployeeId == model.EmployeeId);
+            if (checkEmployee != null)
+            {
+                ModelState.AddModelError("", "Employee is already registered as a user.");
+            }
+
+            if (ModelState.IsValid && checkEmployee == null)
             {
                 var user = new User()
                 {

@@ -18,6 +18,10 @@ namespace IdentityExample.Data
         {
             base.OnModelCreating(builder);
 
+            builder.Entity<User>()
+                .HasIndex(x => x.EmployeeId)
+                .IsUnique();
+
             builder.ApplyConfiguration(new PositionConfiguration());
             builder.ApplyConfiguration(new EmployeeConfiguration());
         }
