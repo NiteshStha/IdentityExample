@@ -1,6 +1,7 @@
 ﻿using IdentityExample.Data;
 using IdentityExample.Models;
 using IdentityExample.ViewModels.Account;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -21,6 +22,7 @@ namespace IdentityExample.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> SignUp()
         {
@@ -34,6 +36,7 @@ namespace IdentityExample.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> SignUp(SignUpViewModel model)
         {
@@ -77,6 +80,50 @@ namespace IdentityExample.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult Login(string? returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost()]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(
+                    model.Email,
+                    model.Password,
+                    model.RememberMe,
+                    false
+                );
+
+                if (result.Succeeded)
+                {
+                    if (!string.IsNullOrWhiteSpace(model.ReturnUrl))
+                    {
+                        return Redirect(model.ReturnUrl);
+                    }
+                    return RedirectToAction("Index", "Home");
+                }
+
+                ModelState.AddModelError("", "Invalid Credentials.");
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> GetEmployeeEmail(int id)
         {

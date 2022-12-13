@@ -1,21 +1,15 @@
-﻿@model IdentityExample.ViewModels.Account.SignUpViewModel
+﻿@model IdentityExample.ViewModels.Account.LoginViewModel
 
 @{
-    ViewData["Title"] = "Sign Up";
+    ViewData["Title"] = "Login";
 }
 
-<form id="signupForm" class="mt-5" asp-action="SignUp" asp-controller="Account" method="post" style="max-width: 480px; margin: 0 auto;">
-    <div class="mb-3">
-        <label asp-for="EmployeeId" class="form-label"></label>
-        <select class="form-select" asp-for="EmployeeId" asp-items="@Model.EmployeeDropDown">
-            <option value="0" selected>-- Select --</option>
-        </select>
-        <span class="text-danger" asp-validation-for="EmployeeId"></span>
-    </div>
-
+<form id="signupForm" class="mt-5" asp-action="Login" asp-controller="Account" method="post" style="max-width: 480px; margin: 0 auto;">
+    <input type="hidden" asp-for="ReturnUrl" value="@ViewBag.ReturnUrl" />
+    
     <div class="mb-3">
         <label asp-for="Email" class="form-label"></label>
-        <input type="text" class="form-control" asp-for="Email" placeholder="Email Address" disabled>
+        <input type="text" class="form-control" asp-for="Email" placeholder="Email Address">
         <span class="text-danger" asp-validation-for="Email"></span>
     </div>
 
@@ -25,16 +19,15 @@
         <span class="text-danger" asp-validation-for="Password"></span>
     </div>
 
-    <div class="mb-3">
-        <label asp-for="ConfirmPassword" class="form-label"></label>
-        <input class="form-control" asp-for="ConfirmPassword" placeholder="Confirm Password">
-        <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+    <div class="form-check mb-3">
+        <input class="form-check-input" asp-for="RememberMe">
+        <label class="form-check-label" asp-for="RememberMe"></label>
     </div>
 
     <div asp-validation-summary="All" class="text-danger"></div>
 
     <div class="mt-4">
-        <button type="submit" class="btn btn-primary">Sign Up</button>
+        <button type="submit" class="btn btn-primary">Login</button>
     </div>
 </form>
 
