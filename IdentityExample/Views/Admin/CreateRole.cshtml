@@ -1,0 +1,27 @@
+﻿@model IdentityExample.ViewModels.Admin.CreateRoleViewModel
+
+@{
+    ViewData["Title"] = "Create Role";
+}
+
+<form id="signupForm" class="mt-5" asp-action="CreateRole" asp-controller="Admin" method="post" style="max-width: 480px; margin: 0 auto;">
+
+    <div class="mb-3">
+        <label asp-for="RoleName" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="RoleName" placeholder="RoleName">
+        <span class="text-danger" asp-validation-for="RoleName"></span>
+    </div>
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mt-4">
+        <button type="submit" class="btn btn-primary">Create Role</button>
+    </div>
+</form>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
