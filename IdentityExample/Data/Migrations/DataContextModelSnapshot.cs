@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace IdentityExample.Migrations
+namespace IdentityExample.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
@@ -109,31 +109,31 @@ namespace IdentityExample.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateOnly(2022, 12, 12),
+                            CreatedDate = new DateOnly(2022, 12, 13),
                             Name = "Software Engineer I"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateOnly(2022, 12, 12),
+                            CreatedDate = new DateOnly(2022, 12, 13),
                             Name = "Software Engineer II"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateOnly(2022, 12, 12),
+                            CreatedDate = new DateOnly(2022, 12, 13),
                             Name = "Senior Software Engineer"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateOnly(2022, 12, 12),
+                            CreatedDate = new DateOnly(2022, 12, 13),
                             Name = "Principal Software Engineer"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateOnly(2022, 12, 12),
+                            CreatedDate = new DateOnly(2022, 12, 13),
                             Name = "Senior Principal Software Engineer"
                         });
                 });

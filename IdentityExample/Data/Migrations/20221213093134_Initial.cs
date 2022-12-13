@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace IdentityExample.Migrations
+namespace IdentityExample.Data.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration
@@ -210,11 +210,11 @@ namespace IdentityExample.Migrations
                 columns: new[] { "Id", "CreatedDate", "Name" },
                 values: new object[,]
                 {
-                    { 1, new DateOnly(2022, 12, 12), "Software Engineer I" },
-                    { 2, new DateOnly(2022, 12, 12), "Software Engineer II" },
-                    { 3, new DateOnly(2022, 12, 12), "Senior Software Engineer" },
-                    { 4, new DateOnly(2022, 12, 12), "Principal Software Engineer" },
-                    { 5, new DateOnly(2022, 12, 12), "Senior Principal Software Engineer" }
+                    { 1, new DateOnly(2022, 12, 13), "Software Engineer I" },
+                    { 2, new DateOnly(2022, 12, 13), "Software Engineer II" },
+                    { 3, new DateOnly(2022, 12, 13), "Senior Software Engineer" },
+                    { 4, new DateOnly(2022, 12, 13), "Principal Software Engineer" },
+                    { 5, new DateOnly(2022, 12, 13), "Senior Principal Software Engineer" }
                 });
 
             migrationBuilder.InsertData(
@@ -260,7 +260,8 @@ namespace IdentityExample.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_EmployeeId",
                 table: "AspNetUsers",
-                column: "EmployeeId");
+                column: "EmployeeId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",

@@ -129,14 +129,19 @@ namespace IdentityExample.Controllers
             return Json(new { success = true, email = employee.Email });
         }
 
+        /// <summary>
+        /// Remote validation for checking if the employee already has a user account.
+        /// </summary>
+        /// <param name="EmployeeId"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [AcceptVerbs("GET", "POST")]
-        public async Task<IActionResult> IsEmployeeUserCreated(int id)
+        public async Task<IActionResult> IsEmployeeUserCreated(int EmployeeId)
         {
-            var employee = await _context.Users.SingleOrDefaultAsync(x => x.EmployeeId == id);
+            var employee = await _context.Users.SingleOrDefaultAsync(x => x.EmployeeId == EmployeeId);
 
-            if (employee != null)
-                return Json(false);
+            if (employee == null)
+                return Json(true);
 
             return Json($"Employee is already registered as a user.");
         }
