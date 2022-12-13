@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace IdentityExample.ViewModels.Account
@@ -21,6 +22,7 @@ namespace IdentityExample.ViewModels.Account
 
         [Display(Name = "Employee")]
         [Range(1, int.MaxValue, ErrorMessage = "Employee is required.")]
+        [Remote(action: "IsEmployeeUserCreated", controller: "Account")]
         public int EmployeeId { get; set; }
 
         public SelectList? EmployeeDropDown { get; set; }

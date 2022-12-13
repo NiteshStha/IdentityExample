@@ -40,13 +40,7 @@ namespace IdentityExample.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp(SignUpViewModel model)
         {
-            var checkEmployee = await _context.Users.SingleOrDefaultAsync(x => x.EmployeeId == model.EmployeeId);
-            if (checkEmployee != null)
-            {
-                ModelState.AddModelError("", "Employee is already registered as a user.");
-            }
-
-            if (ModelState.IsValid && checkEmployee == null)
+            if (ModelState.IsValid)
             {
                 var user = new User()
                 {
@@ -103,7 +97,7 @@ namespace IdentityExample.Controllers
 
                 if (result.Succeeded)
                 {
-                    if (!string.IsNullOrWhiteSpace(model.ReturnUrl))
+                    if (!string.IsNullOrWhiteSpace(model.ReturnUrl) && Url.IsLocalUrl(model.ReturnUrl))
                     {
                         return Redirect(model.ReturnUrl);
                     }
@@ -133,6 +127,18 @@ namespace IdentityExample.Controllers
                 return Json(new { success = false, email = "" });
 
             return Json(new { success = true, email = employee.Email });
+        }
+
+        [AllowAnonymous]
+        [AcceptVerbs("GET", "POST")]
+        public async Task<IActionResult> IsEmployeeUserCreated(int id)
+        {
+            var employee = await _context.Users.SingleOrDefaultAsync(x => x.EmployeeId == id);
+
+            if (employee != null)
+                return Json(false);
+
+            return Json($"Employee is already registered as a user.");
         }
     }
 }
